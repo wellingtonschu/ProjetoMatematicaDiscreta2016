@@ -8,68 +8,65 @@ public class Main {
 
         Scanner entrada = new Scanner(System.in);
 
-        int numero_elem;
-        int saida=0;
-        int elemento1;
-        int elemento2;
+        int valorElemento;
+        int opcao = 0;
+        int elemento01;
+        int elemento02;
 
-        System.out.println("Informe o número de elementos.");
-        numero_elem = entrada.nextInt();
+        System.out.print("Informe a quantidade de elementos: ");
+        valorElemento = entrada.nextInt();
 
-        verificaReticulados Grafo = new verificaReticulados(numero_elem);
+        verificaReticulados funcoes = new verificaReticulados(valorElemento);
 
         //for para fazer todas ligações com o proprio elemento, ex: 1,1; 2,2; 3,3; ....
-        for (int i = 0; i < numero_elem; i++) {
-            Grafo.insereAresta(i, i, 1);
+        for (int i = 0; i < valorElemento; i++) {
+
+            funcoes.insereAresta(i, i, 1);
+
         }
 
-        while(saida != 5){
-            System.out.println("\nO que deseja fazer:");
-            System.out.println("Digite 1 : Inserir relações.");
-            System.out.println("Digite 2 : Excluir relações.");
-            System.out.println("Digite 3 : Para consultar elementos.");
-            System.out.println("Digite 4 : Para verificar se é um reticulado.");
-            System.out.println("Digite 5 : Sair.");
-            saida = entrada.nextInt();
+        while(opcao != 4){
 
-            if(saida == 1){
-                System.out.println("Digite o elemento 1 que será inserido. ");
-                elemento1 = entrada.nextInt();
-                System.out.println("Digite o elemento 2 que será inserido. ");
-                elemento2 = entrada.nextInt();
-                Grafo.insereAresta((elemento1-1), (elemento2-1), 1);
+            System.out.println("\nOpções: ");
+            System.out.println("1 - Inserir Relação");
+            System.out.println("2 - Consultar Relação");
+            System.out.println("3 - Verificar Reticulado");
+            System.out.println("4 - Sair");
+            System.out.print("\nOpção: ");
+            opcao = entrada.nextInt();
 
+            if(opcao == 1){
 
-            }else if(saida == 2){
-                System.out.println("Digite o elemento 1 que será excluído. ");
-                elemento1 = entrada.nextInt();
-                System.out.println("Digite o elemento 2 que será excluído. ");
-                elemento2 = entrada.nextInt();
-                Grafo.retiraAresta((elemento1-1), (elemento2-1));
-                Grafo.esvaziaMatriz();
-                Grafo.identElementosSuperiores();
-                Grafo.identElementosInferiores();
+                System.out.print("\nInforme o primeiro elemento: ");
+                elemento01 = entrada.nextInt();
+                System.out.print("Informe o segundo elemento: ");
+                elemento02 = entrada.nextInt();
+                funcoes.insereAresta((elemento01 - 1), (elemento02 - 1), 1);
 
-            }else if(saida == 3){
-                System.out.println("Digite o elemento 1 que será consultado. ");
-                elemento1 = entrada.nextInt();
-                System.out.println("Digite o elemento 2 que será consultado. ");
-                elemento2 = entrada.nextInt();
-                Grafo.esvaziaMatriz();
-                Grafo.identElementosSuperiores();
-                Grafo.identElementosInferiores();
-                Grafo.imprimeMatrizElemSuperiores(Grafo.getMatrizElemSuperiores());
-                Grafo.imprimeMatrizElemInferiores(Grafo.getMatrizElemInferiores());
-                Grafo.identFronteiraSupMinima((elemento1-1), (elemento2-1));
-                Grafo.identFronteiraInfMaxima((elemento1-1), (elemento2-1));
-            }else if(saida == 4){
-                Grafo.esvaziaMatriz();
-                Grafo.identElementosSuperiores();
-                Grafo.identElementosInferiores();
-                Grafo.imprimeMatrizElemSuperiores(Grafo.getMatrizElemSuperiores());
-                Grafo.imprimeMatrizElemInferiores(Grafo.getMatrizElemInferiores());
-                Grafo.verificaReticulado();
+            }else if(opcao == 2){
+
+                System.out.print("\nInforme o primeiro elemento a ser consultado: ");
+                elemento01 = entrada.nextInt();
+                System.out.print("Informe o segundo elemento a ser consultado: ");
+                elemento02 = entrada.nextInt();
+                funcoes.esvaziaMatriz();
+                System.out.println("");
+                funcoes.identElementosSuperiores();
+                funcoes.identElementosInferiores();
+                funcoes.identFronteiraSupMinima((elemento01 - 1), (elemento02 - 1));
+                funcoes.identFronteiraInfMaxima((elemento01 - 1), (elemento02 - 1));
+
+            }else if(opcao == 3){
+
+                funcoes.esvaziaMatriz();
+                funcoes.identElementosSuperiores();
+                funcoes.identElementosInferiores();
+                funcoes.verificaReticulado();
+
             }
+
         }
+
     }
+
 }
