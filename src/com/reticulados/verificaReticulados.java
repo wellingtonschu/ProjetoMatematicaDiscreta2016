@@ -2,21 +2,20 @@ package com.reticulados;
 
 public class verificaReticulados {
 
-    public final int numNodos;
+    private final int numNodos;
 
     private Integer[][] matrizPesos;
     private Integer[][] matrizElementoSuperiores;
     private Integer[][] matrizElementoInferiores;
-    private Integer[][] novaMatriz;
 
-    int listaValorSup[];
-    int listaValorInf[];
-    int listaAdjacentesValor01[];
-    int listaAdjacentesValor02[];
+    private int listaValorSup[];
+    private int listaValorInf[];
+    private int listaAdjacentesValor01[];
+    private int listaAdjacentesValor02[];
 
-    public int numeroVisitados = getNumNodos();
+    private int numeroVisitados = getNumNodos();
 
-    boolean[] visitados = new boolean[numeroVisitados];
+    private boolean[] visitados = new boolean[numeroVisitados];
 
     private int armazenaIteracaoElementoSup;
     private int armazenaIteracaoElementoInf;
@@ -26,36 +25,33 @@ public class verificaReticulados {
 
     private int valorDeParada = 0;
 
-    int contadorElementoValor01 = 0;
-    int contadorELementoValor02 = 0;
-    int contadorIgualdade = 0;
+    private int contadorIgualdade = 0;
 
-    int valorFinal = 0;
+    private int valorFinal = 0;
 
-    int contador01;
-    int contadorLigacoes01;
-    int contadorLigacoes02;
+    private int contador01;
+    private int contadorLigacoes01;
+    private int contadorLigacoes02;
 
-    int contadorIgualdadeElementosMesmoNivel01 = 0;
-    int contadorIgualdadeElementosMesmoNivel02 = 0;
+    private int contadorIgualdadeElementosMesmoNivel01 = 0;
+    private int contadorIgualdadeElementosMesmoNivel02 = 0;
 
-    int armazenaValorListaAdjacente = 0;
+    private int armazenaValorListaAdjacente = 0;
 
     //Construtor
-    public verificaReticulados(int numeroDePontos) {
+    public verificaReticulados(int numeroDeNodos) {
 
-        setMatrizPesos(criamatrizPesos(numeroDePontos, 0));
-        setMatrizElementoSuperiores(criamatrizPesos(numeroDePontos, 0));
-        setMatrizElementoInferiores(criamatrizPesos(numeroDePontos, 0));
-        setNovaMatriz(criamatrizPesos(numeroDePontos, 0));
-        numNodos = numeroDePontos;
-        this.visitados = new boolean[numeroDePontos];
+        setMatrizPesos(criaMatrizPesos(numeroDeNodos, 0));
+        setMatrizElementoSuperiores(criaMatrizPesos(numeroDeNodos, 0));
+        setMatrizElementoInferiores(criaMatrizPesos(numeroDeNodos, 0));
+        numNodos = numeroDeNodos;
+        this.visitados = new boolean[numeroDeNodos];
 
     }
 
     /*Método para criar a matriz vazia, para facilitar a programação no método construtor é passado a quantidade de vértices
-     (numeroDePontos), através disso é criado a matriz ("setMatrizPesos(criamatrizPesos(numeroDePontos, 0))").*/
-    public Integer[][] criamatrizPesos(int tamanho, Integer tipoLigacao) {
+     (numeroDeNodos), através disso é criado a matriz ("setMatrizPesos(criaMatrizPesos(numeroDeNodos, 0))").*/
+    private Integer[][] criaMatrizPesos(int tamanho, Integer tipoLigacao) {
 
         Integer matriz[][] = new Integer[tamanho + 1][];
 
@@ -84,7 +80,7 @@ public class verificaReticulados {
 
     }
 
-    public void esvaziaMatriz() {
+    public void limpaMatriz() {
 
         for (int i = 0; i < getNumNodos(); i++) {
 
@@ -100,7 +96,7 @@ public class verificaReticulados {
     }
 
     //Busca em profundidade, recebe o vértice inicial.
-    public void identElementosSuperiores() {
+    public void identificaElementosSuperiores() {
 
         for (int i = 0; i < getNumNodos(); i++) {
 
@@ -151,7 +147,7 @@ public class verificaReticulados {
 
     }
 
-    public void identElementosInferiores() {
+    public void identificaElementosInferiores() {
 
         for (int i = 0; i < getNumNodos(); i++) {
 
@@ -203,7 +199,7 @@ public class verificaReticulados {
 
     }
 
-    public void descobreMaximaFronteira(int verifica, int vetor[], int valor1, int valor2) {
+    private void identificaMaximaFronteira(int verifica, int vetor[], int valor1, int valor2) {
 
         int auxiliar;
         maior = 0;
@@ -225,7 +221,7 @@ public class verificaReticulados {
 
     }
 
-    public void descobreMinimaFronteira(int verifica, int vetor[], int valor1, int valor2) {
+    private void identificaMinimaFronteira(int verifica, int vetor[], int valor1, int valor2) {
 
         int auxiliar;
 
@@ -250,7 +246,7 @@ public class verificaReticulados {
 
     }
 
-    public void ListaAdjacencia(int vertice, int primeiroOuSegundo) {
+    private void ListaAdjacencia(int vertice, int primeiroOuSegundo) {
 
         int cont = 0;
 
@@ -288,12 +284,10 @@ public class verificaReticulados {
 
     }
 
-    public void identFronteiraSupMinima(int valor01, int valor02) {
+    public void identificaFronteiraSuperiorMinima(int valor01, int valor02) {
 
         listaValorSup = new int[getNumNodos()];
 
-        contadorElementoValor01 = 0;
-        contadorELementoValor02 = 0;
         contadorIgualdade = 0;
         contadorIgualdadeElementosMesmoNivel01 = 0;
         armazenaValorListaAdjacente = 0;
@@ -309,8 +303,6 @@ public class verificaReticulados {
 
             if (matrizElementoSuperiores[valor01][i] != 0 && matrizElementoSuperiores[valor01][i] != (valor01 + 1)) {
 
-                contadorElementoValor01++;
-
             }
 
         }
@@ -319,8 +311,6 @@ public class verificaReticulados {
         for (int i = 0; i < getNumNodos(); i++) {
 
             if (matrizElementoSuperiores[valor02][i] != 0 && matrizElementoSuperiores[valor02][i] != (valor02 + 1)) {
-
-                contadorELementoValor02++;
 
             }
 
@@ -349,7 +339,7 @@ public class verificaReticulados {
 
                 if (listaValorSup[k] != 0) {
 
-                    System.out.print("[" + (listaValorSup[k]) + "]");
+                    System.out.print(listaValorSup[k]);
 
                 }
 
@@ -392,7 +382,7 @@ public class verificaReticulados {
 
             } else {
 
-                descobreMinimaFronteira(contadorIgualdade, listaValorSup, valor01, valor02);
+                identificaMinimaFronteira(contadorIgualdade, listaValorSup, valor01, valor02);
 
             }
 
@@ -400,12 +390,10 @@ public class verificaReticulados {
 
     }
 
-    public void identFronteiraInfMaxima(int valor01, int valor02) {
+    public void identificaFronteiraInferiorMaxima(int valor01, int valor02) {
 
         listaValorInf = new int[getNumNodos()];
 
-        contadorElementoValor01 = 0;
-        contadorELementoValor02 = 0;
         contadorIgualdade = 0;
         contadorIgualdadeElementosMesmoNivel01 = 0;
         armazenaValorListaAdjacente =0;
@@ -421,8 +409,6 @@ public class verificaReticulados {
 
             if (matrizElementoInferiores[valor01][i] != 0 && matrizElementoInferiores[valor01][i] != (valor01 + 1)) {
 
-                contadorElementoValor01++;
-
             }
 
         }
@@ -431,8 +417,6 @@ public class verificaReticulados {
         for (int i = 0; i < getNumNodos(); i++) {
 
             if (matrizElementoInferiores[valor02][i] != 0 && matrizElementoInferiores[valor02][i] != (valor02 + 1)) {
-
-                contadorELementoValor02++;
 
             }
 
@@ -461,7 +445,7 @@ public class verificaReticulados {
 
                 if (listaValorInf[k] != 0) {
 
-                    System.out.print("[" + (listaValorInf[k]) + "]");
+                    System.out.print(listaValorInf[k]);
 
                 }
 
@@ -504,7 +488,7 @@ public class verificaReticulados {
 
             } else {
 
-                descobreMaximaFronteira(contadorIgualdade, listaValorInf, valor01, valor02);
+                identificaMaximaFronteira(contadorIgualdade, listaValorInf, valor01, valor02);
 
             }
 
@@ -512,12 +496,10 @@ public class verificaReticulados {
 
     }
 
-    public void complementoVerificaReticulado(int valor01, int valor02) {
+    private void complementoVerificaReticulado(int valor01, int valor02) {
 
         listaValorInf = new int[getNumNodos()];
 
-        contadorElementoValor01 = 0;
-        contadorELementoValor02 = 0;
         contadorIgualdade = 0;
         contadorIgualdadeElementosMesmoNivel01 = 0;
         contadorIgualdadeElementosMesmoNivel02 = 0;
@@ -663,55 +645,25 @@ public class verificaReticulados {
 
     }
 
-    public Integer[][] getMatrizPesos() {
-
-        return this.matrizPesos;
-
-    }
-
-    public void setMatrizPesos(Integer[][] pesos) {
+    private void setMatrizPesos(Integer[][] pesos) {
 
         this.matrizPesos = pesos;
 
     }
 
-    public Integer[][] getMatrizElementoSuperiores() {
-
-        return this.matrizElementoSuperiores;
-
-    }
-
-    public void setMatrizElementoSuperiores(Integer[][] zero) {
+    private void setMatrizElementoSuperiores(Integer[][] zero) {
 
         this.matrizElementoSuperiores = zero;
 
     }
 
-    public Integer[][] getMatrizElementoInferiores() {
-
-        return this.matrizElementoInferiores;
-
-    }
-
-    public void setMatrizElementoInferiores(Integer[][] zero) {
+    private void setMatrizElementoInferiores(Integer[][] zero) {
 
         this.matrizElementoInferiores = zero;
 
     }
 
-    public Integer[][] getNovaMatriz() {
-
-        return novaMatriz;
-
-    }
-
-    public void setNovaMatriz(Integer[][] novaMatriz) {
-
-        this.novaMatriz = novaMatriz;
-
-    }
-
-    public int getNumNodos() {
+    private int getNumNodos() {
 
         return numNodos;
 
