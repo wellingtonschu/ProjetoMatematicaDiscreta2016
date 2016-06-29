@@ -298,24 +298,6 @@ public class verificaReticulados {
 
         }
 
-        //for para contar quantos se ligam com elemento valor1
-        for (int i = 0; i < getNumNodos(); i++) {
-
-            if (matrizElementoSuperiores[valor01][i] != 0 && matrizElementoSuperiores[valor01][i] != (valor01 + 1)) {
-
-            }
-
-        }
-
-        //for para contar quantos se ligam com elemento valor2
-        for (int i = 0; i < getNumNodos(); i++) {
-
-            if (matrizElementoSuperiores[valor02][i] != 0 && matrizElementoSuperiores[valor02][i] != (valor02 + 1)) {
-
-            }
-
-        }
-
         for (int i = 0; i < getNumNodos(); i++) {
 
             if ((matrizElementoSuperiores[valor01][i] != 0) && (matrizElementoSuperiores[valor01][i] == matrizElementoSuperiores[valor02][i])) {
@@ -401,24 +383,6 @@ public class verificaReticulados {
         for (int i = 0; i < getNumNodos(); i++) {
 
             listaValorInf[i] = 0;
-
-        }
-
-        //for para contar quantos se ligam com elemento valor1
-        for (int i = 0; i < getNumNodos(); i++) {
-
-            if (matrizElementoInferiores[valor01][i] != 0 && matrizElementoInferiores[valor01][i] != (valor01 + 1)) {
-
-            }
-
-        }
-
-        //for para contar quantos se ligam com elemento valor2
-        for (int i = 0; i < getNumNodos(); i++) {
-
-            if (matrizElementoInferiores[valor02][i] != 0 && matrizElementoInferiores[valor02][i] != (valor02 + 1)) {
-
-            }
 
         }
 
