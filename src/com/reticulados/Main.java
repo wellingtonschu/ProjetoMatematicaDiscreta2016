@@ -18,7 +18,6 @@ public class Main {
 
         verificaReticulados funcoes = new verificaReticulados(valorElemento);
 
-        //for para fazer todas ligações com o proprio elemento, ex: 1,1; 2,2; 3,3; ....
         for (int i = 0; i < valorElemento; i++) {
 
             funcoes.insereAresta(i, i, 1);
