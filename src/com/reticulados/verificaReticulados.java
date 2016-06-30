@@ -38,7 +38,6 @@ public class verificaReticulados {
 
     private int armazenaValorListaAdjacente = 0;
 
-    //Construtor
     public verificaReticulados(int numeroDeNodos) {
 
         setMatrizPesos(criaMatrizPesos(numeroDeNodos, 0));
@@ -49,8 +48,6 @@ public class verificaReticulados {
 
     }
 
-    /*Método para criar a matriz vazia, para facilitar a programação no método construtor é passado a quantidade de vértices
-     (numeroDeNodos), através disso é criado a matriz ("setMatrizPesos(criaMatrizPesos(numeroDeNodos, 0))").*/
     private Integer[][] criaMatrizPesos(int tamanho, Integer tipoLigacao) {
 
         Integer matriz[][] = new Integer[tamanho + 1][];
@@ -71,8 +68,6 @@ public class verificaReticulados {
 
     }
 
-    /*Método para inserir um vértice na matriz de adjacências, a inserção deve ser acompanhada do peso
-     Ex: insereAresta(1, 1 ,-1) 1 ou insereAresta(1, 1 ,1), que indica se o grafo é direcinado ou não.*/
     public void insereAresta(int A, int B, int peso) {
 
         matrizPesos[A][B] = peso;
@@ -95,7 +90,6 @@ public class verificaReticulados {
 
     }
 
-    //Busca em profundidade, recebe o vértice inicial.
     public void identificaElementosSuperiores() {
 
         for (int i = 0; i < getNumNodos(); i++) {
@@ -115,10 +109,8 @@ public class verificaReticulados {
 
     private void elementoSuperior(int vertice) {
 
-        //Marca o vértice passado no parâmetro como true.
         visitados[vertice] = true;
 
-        //Enquando for verdade vai percorrer todos os vizinhos
         while (true) {
 
             matrizElementoSuperiores[armazenaIteracaoElementoSup][vertice] = vertice + 1;
@@ -127,10 +119,8 @@ public class verificaReticulados {
 
                 if (matrizPesos[vertice][i] != 0) {
 
-                    //Se não tiver sido visitado e a interação for maior que o vertice avaliado
                     if (!visitados[i] && i > vertice) {
 
-                        //Chama o método novamente e passa o vértice que não foi visitado como parâmetro.
                         elementoSuperior(i);
 
                     }
@@ -139,8 +129,6 @@ public class verificaReticulados {
 
             }
 
-            /*Se o vértice tiver sido visitado, ou seja, se todos os vértices tiverem sido visitados,
-             o comando break entra em ação.*/
             break;
 
         }
@@ -166,23 +154,18 @@ public class verificaReticulados {
 
     private void elementoInferior(int vertice) {
 
-        //Marca o vértice passado no parâmetro como true.
         visitados[vertice] = true;
 
-        //Enquando for verdade vai percorrer todos os vizinhos.
         while (true) {
 
-            //Insere na matriz de Elementos inferiores.
             matrizElementoInferiores[armazenaIteracaoElementoInf][vertice] = vertice + 1;
 
             for (int i = 0; i < getNumNodos(); i++) {
 
                 if (matrizPesos[i][vertice] != 0) {
 
-                    //Se não tiver sido visitadoe for menor que o vértice visita
                     if (!visitados[i] && i < vertice) {
 
-                        //Chama o método novamente e passa o vértice que não foi visitado como parâmetro.
                         elementoInferior(i);
 
                     }
@@ -191,15 +174,13 @@ public class verificaReticulados {
 
             }
 
-            /*Se o vértice tiver sido visitado, ou seja, se todos os vértices tiverem sido visitados,
-             o comando break entra em ação.*/
             break;
 
         }
 
     }
 
-    private void identificaMaximaFronteira(int verifica, int vetor[], int valor1, int valor2) {
+    private void identificaMaximaFronteira(int verifica, int vetor[], int valor01, int valor02) {
 
         int auxiliar;
         maior = 0;
@@ -216,12 +197,12 @@ public class verificaReticulados {
 
         }
 
-        System.out.print("Maior Elemento da fronteira inferior de " + (valor1 + 1) + " e " + (valor2 + 1) + " : " + maior);
+        System.out.print("Maior Elemento da fronteira inferior de " + (valor01 + 1) + " e " + (valor02 + 1) + " : " + maior);
         System.out.print("\n\n");
 
     }
 
-    private void identificaMinimaFronteira(int verifica, int vetor[], int valor1, int valor2) {
+    private void identificaMinimaFronteira(int verifica, int vetor[], int valor01, int valor02) {
 
         int auxiliar;
 
@@ -241,14 +222,14 @@ public class verificaReticulados {
 
         }
 
-        System.out.println("Menor Elemento da fronteira superior de " + (valor1 + 1) + " e " + (valor2 + 1) + " : " + menor);
+        System.out.println("Menor Elemento da fronteira superior de " + (valor01 + 1) + " e " + (valor02 + 1) + " : " + menor);
         System.out.print("\n");
 
     }
 
     private void ListaAdjacencia(int vertice, int primeiroOuSegundo) {
 
-        int cont = 0;
+        int contador = 0;
 
         if (primeiroOuSegundo == 1) {
 
@@ -258,8 +239,8 @@ public class verificaReticulados {
 
                 if (matrizPesos[vertice][i] == 1) {
 
-                    listaAdjacentesValor01[cont] = (i + 1);
-                    cont++;
+                    listaAdjacentesValor01[contador] = (i + 1);
+                    contador++;
 
                 }
 
@@ -273,8 +254,8 @@ public class verificaReticulados {
 
                 if (matrizPesos[vertice][i] == 1) {
 
-                    listaAdjacentesValor02[cont] = (i + 1);
-                    cont++;
+                    listaAdjacentesValor02[contador] = (i + 1);
+                    contador++;
 
                 }
 
@@ -542,7 +523,6 @@ public class verificaReticulados {
         contadorLigacoes02 = 0;
         valorDeParada = 0;
 
-        //for para verificar se todos elementos pode ir até o último elemento
         for (int i = 0; i < valorFinal; i++) {
 
             if (matrizElementoSuperiores[i][valorFinal - 1] == getNumNodos()) {
@@ -563,7 +543,6 @@ public class verificaReticulados {
 
         }
 
-        // Se o primeiro elemento puder chegar em todos elementos, e o ultimo elemento puder chegar em todos elementos, continua..
         if ((contadorLigacoes01 == valorFinal) && (contadorLigacoes02 == valorFinal)) {
 
             for (int i = 0; i < valorFinal; i++) {
