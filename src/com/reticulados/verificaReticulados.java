@@ -4,7 +4,7 @@ public class verificaReticulados {
 
     private final int numNodos;
 
-    private Integer[][] matrizPesos;
+    private Integer[][] matrizCriada;
     private Integer[][] matrizElementoSuperiores;
     private Integer[][] matrizElementoInferiores;
 
@@ -40,15 +40,15 @@ public class verificaReticulados {
 
     public verificaReticulados(int numeroDeNodos) {
 
-        setMatrizPesos(criaMatrizPesos(numeroDeNodos, 0));
-        setMatrizElementoSuperiores(criaMatrizPesos(numeroDeNodos, 0));
-        setMatrizElementoInferiores(criaMatrizPesos(numeroDeNodos, 0));
+        setMatrizCriada(criaMatriz(numeroDeNodos, 0));
+        setMatrizElementoSuperiores(criaMatriz(numeroDeNodos, 0));
+        setMatrizElementoInferiores(criaMatriz(numeroDeNodos, 0));
         numNodos = numeroDeNodos;
         this.visitados = new boolean[numeroDeNodos];
 
     }
 
-    private Integer[][] criaMatrizPesos(int tamanho, Integer tipoLigacao) {
+    private Integer[][] criaMatriz(int tamanho, Integer tipoLigacao) {
 
         Integer matriz[][] = new Integer[tamanho + 1][];
 
@@ -70,8 +70,8 @@ public class verificaReticulados {
 
     public void insereAresta(int A, int B, int peso) {
 
-        matrizPesos[A][B] = peso;
-        matrizPesos[B][A] = peso;
+        matrizCriada[A][B] = peso;
+        matrizCriada[B][A] = peso;
 
     }
 
@@ -117,7 +117,7 @@ public class verificaReticulados {
 
             for (int i = 0; i < getNumNodos(); i++) {
 
-                if (matrizPesos[vertice][i] != 0) {
+                if (matrizCriada[vertice][i] != 0) {
 
                     if (!visitados[i] && i > vertice) {
 
@@ -162,7 +162,7 @@ public class verificaReticulados {
 
             for (int i = 0; i < getNumNodos(); i++) {
 
-                if (matrizPesos[i][vertice] != 0) {
+                if (matrizCriada[i][vertice] != 0) {
 
                     if (!visitados[i] && i < vertice) {
 
@@ -237,7 +237,7 @@ public class verificaReticulados {
 
             for (int i = 0; i < getNumNodos(); i++) {
 
-                if (matrizPesos[vertice][i] == 1) {
+                if (matrizCriada[vertice][i] == 1) {
 
                     listaAdjacentesValor01[contador] = (i + 1);
                     contador++;
@@ -252,7 +252,7 @@ public class verificaReticulados {
 
             for (int i = 0; i < getNumNodos(); i++) {
 
-                if (matrizPesos[vertice][i] == 1) {
+                if (matrizCriada[vertice][i] == 1) {
 
                     listaAdjacentesValor02[contador] = (i + 1);
                     contador++;
@@ -588,9 +588,9 @@ public class verificaReticulados {
 
     }
 
-    private void setMatrizPesos(Integer[][] pesos) {
+    private void setMatrizCriada(Integer[][] valores) {
 
-        this.matrizPesos = pesos;
+        this.matrizCriada = valores;
 
     }
 
