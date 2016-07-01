@@ -582,7 +582,7 @@ public class verificaReticulados {
         } else {
 
             System.out.print("\n");
-            System.out.println("Não é reticulado, pois não possui limite mínimo ou limite máximo.");
+            System.out.println("Não é reticulado, pois não possui fronteira superior mínima ou fronteira inferior máximo.");
 
         }
 
